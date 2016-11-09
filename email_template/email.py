@@ -53,6 +53,12 @@ def render_django_fields(template, context):
         recipient_list.append(recipient.strip())
     message["recipient_list"] = recipient_list
 
+    bcc_recipients = render_node(template, "bcc", context)
+    bcc_recipient_list = []
+    for recipient in bcc_recipients.split(","):
+        bcc_recipient_list.append(recipient.strip())
+    message["bcc"] = bcc_recipient_list
+
     return message
 
 
@@ -77,6 +83,7 @@ def send_django_wrapper(**kwargs):
         to=kwargs["recipient_list"],
         headers=kwargs.get("headers", {}),
         cc=kwargs.get("cc", []),
+        bcc=kwargs.get("bcc", []),
         connection=kwargs.get("connection", None),
     )
 
