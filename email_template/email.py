@@ -77,6 +77,7 @@ def send_django_wrapper(**kwargs):
         to=kwargs["recipient_list"],
         headers=kwargs.get("headers", {}),
         cc=kwargs.get("cc", []),
+        bcc=kwargs.get("bcc", []),
         connection=kwargs.get("connection", None),
     )
 
